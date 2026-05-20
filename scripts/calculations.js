@@ -34,3 +34,11 @@ function calculateBalance() {
     balanceColor = "green";
   }
 }
+
+function addExpense(category, amount) {
+  expenseEntries.push([category, amount]);
+}
+
+function changeBudget(newBudget) {
+  budgetValue = newBudget;
+}
