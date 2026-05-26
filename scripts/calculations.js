@@ -1,10 +1,5 @@
-// Primer presupuesto
 let budgetValue = 0;
-
-// Acumulados de gastos
 let totalExpensesValue = 0;
-
-// Color del estado
 let balanceColor = "green";
 
 let expenseEntries = [
@@ -33,6 +28,8 @@ function calculateBalance() {
   } else {
     balanceColor = "green";
   }
+
+  return currentBalance;
 }
 
 function addExpense(category, amount) {
@@ -41,4 +38,42 @@ function addExpense(category, amount) {
 
 function changeBudget(newBudget) {
   budgetValue = newBudget;
+}
+
+function calculateAverageExpense() {
+  if (expenseEntries.length === 0) {
+    return 0;
+  }
+  return totalExpensesValue / expenseEntries.length;
+}
+
+function calculateCategoryExpenses(category) {
+  let categoryTotal = 0;
+  for (let i = 0; i < expenseEntries.length; i++) {
+    if (expenseEntries[i][0] === category) {
+      categoryTotal += expenseEntries[i][1];
+    }
+  }
+  return categoryTotal;
+}
+
+function calculateLargestCategory() {
+  const categories = [
+    "groceries",
+    "restaurants",
+    "transport",
+    "home",
+    "subscriptions",
+  ];
+  let largestCategory = categories[0];
+  let maxExpense = calculateCategoryExpenses(categories[0]);
+
+  for (let i = 1; i < categories.length; i++) {
+    let currentCategoryExpense = calculateCategoryExpenses(categories[i]);
+    if (currentCategoryExpense > maxExpense) {
+      maxExpense = currentCategoryExpense;
+      largestCategory = categories[i];
+    }
+  }
+  return largestCategory;
 }
