@@ -12,9 +12,12 @@ let expenseEntries = [
   ["subscriptions", 12],
 ];
 
+for (let i = 0; i < expenseEntries.length; i++) {
+  totalExpensesValue += expenseEntries[i][1];
+}
+
 function calculateBalance() {
   totalExpensesValue = 0;
-
   for (let i = 0; i < expenseEntries.length; i++) {
     totalExpensesValue += expenseEntries[i][1];
   }
@@ -23,13 +26,17 @@ function calculateBalance() {
 
   if (currentBalance < 0) {
     balanceColor = "red";
-  } else if (currentBalance === 0) {
-    balanceColor = "yellow";
+  } else if (currentBalance < budgetValue * 0.25) {
+    balanceColor = "orange";
   } else {
     balanceColor = "green";
   }
 
   return currentBalance;
+}
+
+function updateBalanceColor() {
+  calculateBalance();
 }
 
 function addExpense(category, amount) {
@@ -76,4 +83,9 @@ function calculateLargestCategory() {
     }
   }
   return largestCategory;
+}
+
+function addExpenseEntry(values) {
+  expenseEntries.push([values[0], values[1]]);
+  totalExpensesValue += values[1];
 }
