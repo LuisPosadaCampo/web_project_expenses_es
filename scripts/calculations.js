@@ -17,34 +17,19 @@ for (let i = 0; i < expenseEntries.length; i++) {
 }
 
 function calculateBalance() {
-  totalExpensesValue = 0;
-  for (let i = 0; i < expenseEntries.length; i++) {
-    totalExpensesValue += expenseEntries[i][1];
-  }
+  return budgetValue - totalExpensesValue;
+}
 
-  let currentBalance = budgetValue - totalExpensesValue;
+function updateBalanceColor() {
+  const balance = calculateBalance();
 
-  if (currentBalance < 0) {
+  if (balance < 0) {
     balanceColor = "red";
-  } else if (currentBalance < budgetValue * 0.25) {
+  } else if (balance < budgetValue * 0.25) {
     balanceColor = "orange";
   } else {
     balanceColor = "green";
   }
-
-  return currentBalance;
-}
-
-function updateBalanceColor() {
-  calculateBalance();
-}
-
-function addExpense(category, amount) {
-  expenseEntries.push([category, amount]);
-}
-
-function changeBudget(newBudget) {
-  budgetValue = newBudget;
 }
 
 function calculateAverageExpense() {
